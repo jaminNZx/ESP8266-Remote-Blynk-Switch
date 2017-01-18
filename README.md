@@ -64,13 +64,15 @@ char pass[] = "xxxxx";
 
 ## Usage
 
-The dash consists of a few buttons, LED and a slider. 
+The dash consists of a few buttons, LED, timer and a slider. 
 
 You have manual control via the MANUAL button. ON and OFF state. 
 
 You can also trigger the device using the TRIGGER TIMEOUT button. It will activate the relay, then deactivate it after the period set by the slider.
 
 The LED just shows the real time state of the relay.
+
+There is also a timer widget which you can use to have the relay turn on/off at a certain time.
 
 # Deveoping Further
 
