@@ -12,7 +12,8 @@ SimpleTimer timer;
 /****************************************************************************/
 void setup() {
   WiFi.mode(WIFI_STA);
-  Blynk.begin(auth, ssid, pass, IPAddress(192, 168, 1, 2));
+  Blynk.begin(auth, ssid, pass); // CLOUD SERVER
+  //Blynk.begin(auth, ssid, pass, IPAddress(192, 168, 1, 2)); // LOCAL SERVER
   while (Blynk.connect() == false) {}
   ArduinoOTA.setHostname("Remote-Switch-1"); // OPTIONAL
   ArduinoOTA.begin();
