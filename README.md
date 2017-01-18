@@ -1,6 +1,14 @@
 # ESP8266-Remote-Blynk-Switch
 A simple AC switch using an ESP8266 with Blynk mobile app interface. 
 
+You could use this to control ANY AC or DC load up to the rated value of your relay. 
+
+I have it controlling my garden lights, and even have my DIY ESP8266 Gate Counter and Logger triggering the lights when the gate is opened so you can see where you're going at night. 
+
+You could use it to turn on a coffee maker (soo cliche), turn on the TV when you're not home, or use it to turn off and on lights. Anything really! 
+
+I hacked it in to a 4way power board so I could turn on and off everything plugged in to it at once (again, good for mulitple sets of garden lights).
+
 Feel free to make pull requests if you wish to help develop it. 
 
 There is also a support thread on the Blynk community forums: http://community.blynk.cc/t/mini-esp8266-relay-controlled-ac-power-strip-sonoff-duplicate/9549
