@@ -85,3 +85,15 @@ bridge.virtualWrite(0,HIGH);
 Using the new multi-device features of the app, you could use the single Blynk dash to control as many remote switches around your home. This is great because as you can see in the first image, I have set it up to control mulitple zones around my house all from the same dash. 
 
 If you run out of room, you could just add the TABS widget and build on another app page. 
+
+# Build Gallery
+
+![ESP8266 Build Galelry](http://community.blynk.cc/uploads/default/optimized/2X/8/8f7701daff5ca8326e2b4d4ca5b00236416349c4_1_375x500.JPG)
+![ESP8266 Build Galelry](http://community.blynk.cc/uploads/default/optimized/2X/0/0e1dc57962373873cefb44b95db958285e3a398d_1_375x500.JPG)
+![ESP8266 Build Galelry](http://community.blynk.cc/uploads/default/optimized/2X/7/717696bb7d3a9b3b7dc6595b14c568734cedcea1_1_666x500.JPG)
+![ESP8266 Build Galelry](http://community.blynk.cc/uploads/default/optimized/2X/7/7cdd16547c66c6ed552c4d14438eec676bac01f6_1_375x500.JPG)
+![ESP8266 Build Galelry](http://community.blynk.cc/uploads/default/optimized/2X/2/2f3b14c6db2c63e738f3edcd52ca27b747951f56_1_666x500.JPG)
+![ESP8266 Build Galelry](http://community.blynk.cc/uploads/default/optimized/2X/2/287da7c6946c8b4d26353d92db5e9f6c090cfb7b_1_666x500.JPG)
+![ESP8266 Build Galelry](http://community.blynk.cc/uploads/default/optimized/2X/5/549b1aab15cb4bea90ef729491a0f5685d92aa8d_1_666x500.JPG)
+![ESP8266 Build Galelry](http://community.blynk.cc/uploads/default/optimized/2X/c/c9866e2a4d6d535b710050e4a52d49867b36a582_1_666x500.JPG)
+![ESP8266 Build Galelry](http://community.blynk.cc/uploads/default/optimized/2X/8/85712b86b53a622474ae118b4f5020ab4ef647e3_1_666x500.JPG)
