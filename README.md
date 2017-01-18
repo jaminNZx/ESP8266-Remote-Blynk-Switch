@@ -69,3 +69,16 @@ You have manual control via the MANUAL button. ON and OFF state.
 You can also trigger the device using the TRIGGER TIMEOUT button. It will activate the relay, then deactivate it after the period set by the slider.
 The LED just shows the real time state of the relay.
 
+# Deveoping Further
+
+If you're just using this with manual control, then you can easily remove parts of the sketch as well as the dash widgets from the Blynk app. 
+
+If you wish to toggle the relay from another ESP or hardware, then you will need to set up a Blynk Bridge between the two hardwares and make the call to V0. 
+
+```cpp
+bridge.virtualWrite(0,HIGH); 
+```
+
+Using the new multi-device features of the app, you could use the single Blynk dash to control as many remote switches around your home. This is great because as you can see in the first image, I have set it up to control mulitple zones around my house all from the same dash. 
+
+If you run out of room, you could just add the TABS widget and build on another app page. 
