@@ -2,71 +2,74 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include <SimpleTimer.h>
-/****************************************************************************/
-char auth[] = "xxxxxxxxxxxxxxxxxxx";
-char ssid[] = "xxxxxxxxxxxxxxxxxxx";
-char pass[] = "xxxxxxxxxxxxxxxxxxx";
-#define switchPin 14 // Pin D5 on ESP Dev/WeMos Mini
+#include "settings.h"
+
 int switchState, timer1, switchDelay;
 SimpleTimer timer;
-/****************************************************************************/
-void setup() {
-  WiFi.mode(WIFI_STA);
-  Blynk.begin(auth, ssid, pass); // CLOUD SERVER
-  //Blynk.begin(auth, ssid, pass, IPAddress(192, 168, 1, 2)); // LOCAL SERVER
-  while (Blynk.connect() == false) {}
-  ArduinoOTA.setHostname("Remote-Switch-1"); // OPTIONAL
-  ArduinoOTA.begin();
-  pinMode(switchPin, OUTPUT);
-  digitalWrite(switchPin, HIGH);
-  switchDelay = 60000;
-  Blynk.syncVirtual(4);
-  timer.setInterval(2000L, sendWifi);
-}
-/****************************************************************************/
+
 void sendWifi() {
-  Blynk.virtualWrite(5, map(WiFi.RSSI(), -105, -40, 0, 100) );
+  Blynk.virtualWrite(vPIN_INFO, map(WiFi.RSSI(), -105, -40, 0, 100) );
 }
-/****************************************************************************/
-BLYNK_WRITE(0) { // remote delay switch
-  if (digitalRead(switchPin)) {
+
+BLYNK_WRITE(vPIN_BUTTON_TIMEOUT) { // remote delay switch
+  if (digitalRead(SWITCH_PIN)) {
     toggleSwitchON();
     timer.setTimeout(switchDelay, toggleSwitchOFF);
   }
 }
-BLYNK_WRITE(1) { // manual button
+
+BLYNK_WRITE(vPIN_BUTTON_MANUAL) { // manual button
   toggleSwitch(param.asInt());
 }
-BLYNK_WRITE(2) { // timer switch
+
+BLYNK_WRITE(vPIN_TIME) { // timer switch
   if (param.asInt()) {
     toggleSwitchON();
   } else {
     toggleSwitchOFF();
   }
 }
-BLYNK_WRITE(4) {
+
+BLYNK_WRITE(vPIN_TIMEOUT) {
   switchDelay = param[0].asInt() * 60000;
 }
 
 void toggleSwitchOFF() {
-  digitalWrite(switchPin, 1);
-  Blynk.virtualWrite(1, 0);
-  Blynk.virtualWrite(3, 0);
+  digitalWrite(SWITCH_PIN, 1);
+  Blynk.virtualWrite(vPIN_BUTTON_MANUAL, 0);
+  Blynk.virtualWrite(vPIN_LED, 0);
 }
 
 void toggleSwitchON() {
-  digitalWrite(switchPin, 0);
-  Blynk.virtualWrite(1, 1);
-  Blynk.virtualWrite(3, 255);
+  digitalWrite(SWITCH_PIN, 0);
+  Blynk.virtualWrite(vPIN_BUTTON_MANUAL, 1);
+  Blynk.virtualWrite(vPIN_LED, 255);
 }
 
 void toggleSwitch(bool state) {
-  digitalWrite(switchPin, !state);
-  switchState = digitalRead(switchPin);
+  digitalWrite(SWITCH_PIN, !state);
+  switchState = digitalRead(SWITCH_PIN);
   if (!switchState) {
     switchState = 255;
   }
-  Blynk.virtualWrite(3, switchState);
+  Blynk.virtualWrite(vPIN_LED, switchState);
+}
+
+void setup() {
+  WiFi.mode(WIFI_STA);
+#if defined(USE_LOCAL_SERVER)
+  Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS, SERVER);
+#else
+  Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS, );
+#endif
+  while (Blynk.connect() == false) {}
+  ArduinoOTA.setHostname(OTA_HOSTNAME); // OPTIONAL
+  ArduinoOTA.begin();
+  pinMode(SWITCH_PIN, OUTPUT);
+  digitalWrite(SWITCH_PIN, HIGH);
+  switchDelay = 60000;
+  Blynk.syncVirtual(4);
+  timer.setInterval(2000L, sendWifi);
 }
 
 void loop() {
