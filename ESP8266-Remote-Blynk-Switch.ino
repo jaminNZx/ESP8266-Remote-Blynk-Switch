@@ -68,7 +68,7 @@ void setup() {
   pinMode(SWITCH_PIN, OUTPUT);
   digitalWrite(SWITCH_PIN, HIGH);
   switchDelay = 60000;
-  Blynk.syncVirtual(4);
+  Blynk.syncVirtual(vPIN_TIMEOUT);
   timer.setInterval(2000L, sendWifi);
 }
 
