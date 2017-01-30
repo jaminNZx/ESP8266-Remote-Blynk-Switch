@@ -13,20 +13,20 @@ void sendWifi() {
 
 BLYNK_WRITE(vPIN_BUTTON_TIMEOUT) { // remote delay switch
   if (digitalRead(SWITCH_PIN)) {
-    toggleSwitchON();
-    timer.setTimeout(switchDelay, toggleSwitchOFF);
+    Switch_ON();
+    timer.setTimeout(switchDelay, Switch_OFF);
   }
 }
 
 BLYNK_WRITE(vPIN_BUTTON_MANUAL) { // manual button
-  toggleSwitch(param.asInt());
+  Switch_Toggle(param.asInt());
 }
 
 BLYNK_WRITE(vPIN_TIME) { // timer switch
   if (param.asInt()) {
-    toggleSwitchON();
+    Switch_ON();
   } else {
-    toggleSwitchOFF();
+    Switch_OFF();
   }
 }
 
@@ -34,19 +34,19 @@ BLYNK_WRITE(vPIN_TIMEOUT) {
   switchDelay = param[0].asInt() * 60000;
 }
 
-void toggleSwitchOFF() {
+void Switch_OFF() {
   digitalWrite(SWITCH_PIN, 1);
   Blynk.virtualWrite(vPIN_BUTTON_MANUAL, 0);
   Blynk.virtualWrite(vPIN_LED, 0);
 }
 
-void toggleSwitchON() {
+void Switch_ON() {
   digitalWrite(SWITCH_PIN, 0);
   Blynk.virtualWrite(vPIN_BUTTON_MANUAL, 1);
   Blynk.virtualWrite(vPIN_LED, 255);
 }
 
-void toggleSwitch(bool state) {
+void Switch_Toggle(bool state) {
   digitalWrite(SWITCH_PIN, !state);
   switchState = digitalRead(SWITCH_PIN);
   if (!switchState) {
