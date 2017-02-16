@@ -60,7 +60,7 @@ void setup() {
 #if defined(LOCAL_SERVER)
   Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS, LOCAL_SERVER);
 #else
-  Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS, );
+  Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS);
 #endif
   while (Blynk.connect() == false) {}
   ArduinoOTA.setHostname(OTA_HOSTNAME); // OPTIONAL
