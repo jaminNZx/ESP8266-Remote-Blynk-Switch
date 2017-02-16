@@ -57,8 +57,8 @@ void Switch_Toggle(bool state) {
 
 void setup() {
   WiFi.mode(WIFI_STA);
-#if defined(USE_LOCAL_SERVER)
-  Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS, SERVER);
+#if defined(LOCAL_SERVER)
+  Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS, LOCAL_SERVER);
 #else
   Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS, );
 #endif

@@ -17,10 +17,9 @@
 */
   #define OTA_HOSTNAME          "REMOTE-SWITCH"
 /*
-   Local Server Settings (uncomment to use local server)
+   Local Blynk Server Settings (uncomment to use local server and set address)
 */
-#define USE_LOCAL_SERVER
-#define SERVER                  IPAddress(192, 168, 1, 2)
+//#define LOCAL_SERVER            IPAddress(192, 168, 1, 2)
 /*
    Hardware Pins
 */
