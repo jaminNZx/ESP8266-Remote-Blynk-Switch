@@ -8,18 +8,13 @@
 */
   #define AUTH                  "b9af72dccede40e195093c149688c4fb"
 /*
-   Wifi Credentials
-*/
-  #define WIFI_SSID             "PrettyFlyForAWiFi"
-  #define WIFI_PASS             "custom2015"
-/*
    Over The Air Hostname. 
 */
-  #define OTA_HOSTNAME          "REMOTE-SWITCH"
+  #define OTA_HOSTNAME          "REMOTE-SWITCH-FRONT"
 /*
    Local Blynk Server Settings (uncomment to use local server and set address)
 */
-//#define LOCAL_SERVER            IPAddress(192, 168, 1, 2)
+#define LOCAL_SERVER            IPAddress(192, 168, 1, 2)
 /*
    Hardware Pins
 */

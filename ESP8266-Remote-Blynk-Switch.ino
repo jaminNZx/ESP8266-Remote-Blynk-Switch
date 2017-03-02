@@ -1,14 +1,16 @@
+#define BLYNK_PRINT Serial
 #include <ArduinoOTA.h>
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include <SimpleTimer.h>
 #include "settings.h"
+#include <wifi_credentials.h>
 
 int switchState, timer1, switchDelay;
 SimpleTimer timer;
 
 void sendWifi() {
-  Blynk.virtualWrite(vPIN_INFO, map(WiFi.RSSI(), -105, -40, 0, 100) );
+  Blynk.setProperty(vPIN_INFO,"label", String("WIFI: ") + String(map(WiFi.RSSI(), -105, -40, 0, 100)) + String("%") );
 }
 
 BLYNK_WRITE(vPIN_BUTTON_TIMEOUT) { // remote delay switch
@@ -57,6 +59,7 @@ void Switch_Toggle(bool state) {
 
 void setup() {
   WiFi.mode(WIFI_STA);
+  Serial.begin(115200);
 #if defined(LOCAL_SERVER)
   Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS, LOCAL_SERVER);
 #else
