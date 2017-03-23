@@ -10,7 +10,7 @@ int switchState, timer1, switchDelay;
 SimpleTimer timer;
 
 void sendWifi() {
-  Blynk.setProperty(vPIN_INFO,"label", String("WIFI: ") + String(map(WiFi.RSSI(), -105, -40, 0, 100)) + String("%") );
+  Blynk.setProperty(vPIN_INFO,"label", String("WIFI: ") + String(map(WiFi.RSSI(), -105, -40, 0, 100)) + String("% (") + WiFi.RSSI() + String(")") );
 }
 
 BLYNK_WRITE(vPIN_BUTTON_TIMEOUT) { // remote delay switch
