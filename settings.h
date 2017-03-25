@@ -7,6 +7,7 @@
      Blynk Auth Code
 */
   #define AUTH                  "b9af72dccede40e195093c149688c4fb"
+  #define AUTH_GATE             "ae5eab51641343209ae3c2b139ef6e0b"
 /*
    Over The Air Hostname. 
 */
@@ -28,3 +29,4 @@
 #define vPIN_LED                V3 
 #define vPIN_TIMEOUT            V4 
 #define vPIN_INFO               V5
+#define vPIN_BRIDGE_GATE        V17

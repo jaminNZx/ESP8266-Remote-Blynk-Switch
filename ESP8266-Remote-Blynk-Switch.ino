@@ -8,9 +8,14 @@
 
 int switchState, timer1, switchDelay;
 SimpleTimer timer;
+WidgetBridge gate(vPIN_BRIDGE_GATE);
+
+BLYNK_CONNECTED() {
+  gate.setAuthToken("ae5eab51641343209ae3c2b139ef6e0b");
+}
 
 void sendWifi() {
-  Blynk.setProperty(vPIN_INFO,"label", String("WIFI: ") + String(map(WiFi.RSSI(), -105, -40, 0, 100)) + String("% (") + WiFi.RSSI() + String(")") );
+  Blynk.setProperty(vPIN_INFO, "label", String("WIFI: ") + String(map(WiFi.RSSI(), -105, -40, 0, 100)) + String("% (") + WiFi.RSSI() + String("dB)") + String(" IP: ") + WiFi.localIP().toString());
 }
 
 BLYNK_WRITE(vPIN_BUTTON_TIMEOUT) { // remote delay switch
@@ -25,6 +30,7 @@ BLYNK_WRITE(vPIN_BUTTON_MANUAL) { // manual button
 }
 
 BLYNK_WRITE(vPIN_TIME) { // timer switch
+  gate.virtualWrite(vPIN_BRIDGE_GATE, param.asInt());
   if (param.asInt()) {
     Switch_ON();
   } else {
@@ -60,18 +66,18 @@ void Switch_Toggle(bool state) {
 void setup() {
   WiFi.mode(WIFI_STA);
   Serial.begin(115200);
-#if defined(LOCAL_SERVER)
+#ifdef LOCAL_SERVER
   Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS, LOCAL_SERVER);
 #else
   Blynk.begin(AUTH, WIFI_SSID, WIFI_PASS);
 #endif
   while (Blynk.connect() == false) {}
-  ArduinoOTA.setHostname(OTA_HOSTNAME); // OPTIONAL
+  ArduinoOTA.setHostname(OTA_HOSTNAME);
   ArduinoOTA.begin();
   pinMode(SWITCH_PIN, OUTPUT);
   digitalWrite(SWITCH_PIN, HIGH);
   switchDelay = 60000;
-  Blynk.syncVirtual(vPIN_TIMEOUT);
+  Blynk.syncVirtual(vPIN_TIMEOUT, vPIN_TIME);
   timer.setInterval(2000L, sendWifi);
 }
 
