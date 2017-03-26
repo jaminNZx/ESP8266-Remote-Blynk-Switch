@@ -15,7 +15,7 @@ BLYNK_CONNECTED() {
 }
 
 void sendWifi() {
-  Blynk.setProperty(vPIN_INFO, "label", String("WIFI: ") + String(map(WiFi.RSSI(), -105, -40, 0, 100)) + String("% (") + WiFi.RSSI() + String("dB)") + String(" IP: ") + WiFi.localIP().toString());
+  Blynk.setProperty(vPIN_INFO, "label", String("WIFI: ") + String(map(WiFi.RSSI(), -105, -40, 0, 100)) + String("% (") + WiFi.RSSI() + String("dB)"));
 }
 
 BLYNK_WRITE(vPIN_BUTTON_TIMEOUT) { // remote delay switch
