@@ -40,6 +40,7 @@ BLYNK_WRITE(vPIN_TIME) { // timer switch
 
 BLYNK_WRITE(vPIN_TIMEOUT) {
   switchDelay = param[0].asInt() * 60000;
+  Blynk.syncVirtual(vPIN_BUTTON_TIMEOUT);
 }
 
 void Switch_OFF() {
