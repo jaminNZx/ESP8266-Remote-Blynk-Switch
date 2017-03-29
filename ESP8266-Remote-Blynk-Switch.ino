@@ -30,9 +30,9 @@ BLYNK_WRITE(vPIN_BUTTON_MANUAL) { // manual button
 }
 
 BLYNK_WRITE(vPIN_TIME) { // timer switch
-  gate.virtualWrite(vPIN_BRIDGE_GATE, param.asInt());
   if (param.asInt()) {
     Switch_ON();
+    gate.virtualWrite(vPIN_BRIDGE_GATE, param.asInt());
   } else {
     Switch_OFF();
   }
