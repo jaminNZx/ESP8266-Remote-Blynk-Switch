@@ -14,10 +14,6 @@ BLYNK_CONNECTED() {
   gate.setAuthToken("ae5eab51641343209ae3c2b139ef6e0b");
 }
 
-void sendWifi() {
-  Blynk.setProperty(vPIN_INFO, "label", String("WIFI: ") + String(map(WiFi.RSSI(), -105, -40, 0, 100)) + String("% (") + WiFi.RSSI() + String("dB)"));
-}
-
 BLYNK_WRITE(vPIN_BUTTON_TIMEOUT) { // remote delay switch
   if (digitalRead(SWITCH_PIN)) {
     Switch_ON();
@@ -58,9 +54,7 @@ void Switch_ON() {
 void Switch_Toggle(bool state) {
   digitalWrite(SWITCH_PIN, !state);
   switchState = digitalRead(SWITCH_PIN);
-  if (!switchState) {
-    switchState = 255;
-  }
+  if (!switchState) switchState = 255;
   Blynk.virtualWrite(vPIN_LED, switchState);
 }
 
@@ -79,7 +73,9 @@ void setup() {
   digitalWrite(SWITCH_PIN, HIGH);
   switchDelay = 60000;
   Blynk.syncVirtual(vPIN_TIMEOUT, vPIN_TIME);
-  timer.setInterval(2000L, sendWifi);
+  timer.setInterval(2000L, []() {
+    Blynk.setProperty(vPIN_INFO, "label", String("WIFI: ") + String(map(WiFi.RSSI(), -105, -40, 0, 100)) + String("% (") + WiFi.RSSI() + String("dB)"));
+  });
 }
 
 void loop() {
